@@ -1,0 +1,448 @@
+﻿生成启动时间为 2023/3/27 星期一 21:41:15。
+     1>项目“C:\Users\Administrator\Desktop\王全武\0327\test0327\test0327\test0327.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\test0327.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         G:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt test0327.c
+         test0327.c
+       Link:
+         G:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Administrator\Desktop\王全武\0327\test0327\Debug\test0327.exe" /VERBOSE /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\test0327.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Administrator\Desktop\王全武\0327\test0327\Debug\test0327.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Administrator\Desktop\王全武\0327\test0327\Debug\test0327.lib" /MACHINE:X86 Debug\test0327.obj
+         LINK : 没有找到 C:\Users\Administrator\Desktop\王全武\0327\test0327\Debug\test0327.exe 或上一个增量链接没有生成它；正在执行完全链接
+         
+         正在启动传递 1
+         已处理 /DEFAULTLIB: MSVCRTD
+         已处理 /DEFAULTLIB: OLDNAMES
+         
+         正在搜索库
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\kernel32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\user32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\gdi32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\winspool.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\comdlg32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\advapi32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\shell32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\ole32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\oleaut32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\uuid.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\odbc32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\odbccp32.lib:
+             正在搜索 G:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\lib\MSVCRTD.lib:
+               已找到 __imp__printf
+                 已在 test0327.obj 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __RTC_CheckEsp
+                 已在 test0327.obj 中引用
+                 已加载 MSVCRTD.lib(_stack_.obj)
+               已找到 __RTC_Shutdown
+                 已在 test0327.obj 中引用
+                 已加载 MSVCRTD.lib(_init_.obj)
+               已找到 _mainCRTStartup
+                 已加载 MSVCRTD.lib(crtexe.obj)
+               已找到 __IMPORT_DESCRIPTOR_MSVCR100D
+                 已在 MSVCRTD.lib(MSVCR100D.dll) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 "void __cdecl _RTC_Failure(void *,int)" (?_RTC_Failure@@YAXPAXH@Z)
+                 已在 MSVCRTD.lib(_stack_.obj) 中引用
+                 已加载 MSVCRTD.lib(_error_.obj)
+               已找到 __RTC_SetErrorFuncW
+                 已在 MSVCRTD.lib(_init_.obj) 中引用
+                 已加载 MSVCRTD.lib(_userapi_.obj)
+               已找到 __CRT_RTC_INITW
+                 已在 MSVCRTD.lib(_init_.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 ___CxxSetUnhandledExceptionFilter
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(unhandld.obj)
+               已找到 __imp___configthreadlocale
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 ___globallocalestatus
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(xthdloc.obj)
+               已找到 __setdefaultprecision
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(fp8.obj)
+               已找到 __imp____setusermatherr
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __matherr
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(merr.obj)
+               已找到 __setargv
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(dllargv.obj)
+               已找到 __RTC_Initialize
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(_initsect_.obj)
+               已找到 __commode
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(xncommod.obj)
+               已找到 __imp___commode
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __fmode
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(xtxtmode.obj)
+               已找到 __imp___fmode
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 ___onexitbegin
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(atonexit.obj)
+               已找到 __imp____set_app_type
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __amsg_exit
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __imp____getmainargs
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __dowildcard
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(wildcard.obj)
+               已找到 __newmode
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(_newmode.obj)
+               已找到 ___security_init_cookie
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(gs_support.obj)
+               已找到 __imp___exit
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __XcptFilter
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __imp___cexit
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __imp__exit
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __imp____initenv
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __imp___CrtSetCheckCount
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __IsNonwritableInCurrentImage
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(pesect.obj)
+               已找到 __imp___CrtDbgReportW
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __initterm
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 ___xc_a
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(cinitexe.obj)
+         已处理 /DEFAULTLIB: kernel32.lib
+          已处理 /DISALLOWLIB: libcmt.lib
+          已处理 /DISALLOWLIB: libcmtd.lib
+          已处理 /DISALLOWLIB: msvcrt.lib
+               已找到 __initterm_e
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 ___native_startup_state
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 MSVCRTD.lib(natstart.obj)
+               已找到 ___security_cookie
+                 已在 MSVCRTD.lib(pesect.obj) 中引用
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已在 MSVCRTD.lib(gs_support.obj) 中引用
+                 已加载 MSVCRTD.lib(gs_cookie.obj)
+               已找到 __except_handler4
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已在 MSVCRTD.lib(pesect.obj) 中引用
+                 已加载 MSVCRTD.lib(chandler4gs.obj)
+               已找到 __NULL_IMPORT_DESCRIPTOR
+                 已在 MSVCRTD.lib(MSVCR100D.dll) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 MSVCR100D_NULL_THUNK_DATA
+                 已在 MSVCRTD.lib(MSVCR100D.dll) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 "int __cdecl _RTC_GetSrcLine(unsigned char *,wchar_t *,unsigned long,int *,wchar_t *,unsigned long)" (?_RTC_GetSrcLine@@YAHPAEPA_WKPAH1K@Z)
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已加载 MSVCRTD.lib(_pdblkup_.obj)
+               已找到 @__security_check_cookie@4
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已在 MSVCRTD.lib(chandler4gs.obj) 中引用
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 MSVCRTD.lib(secchk.obj)
+               已找到 "void __cdecl terminate(void)" (?terminate@@YAXXZ)
+                 已在 MSVCRTD.lib(unhandld.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __controlfp_s
+                 已在 MSVCRTD.lib(fp8.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __invoke_watson
+                 已在 MSVCRTD.lib(fp8.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __unlock
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 ___dllonexit
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __lock
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __imp___onexit
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 __except_handler4_common
+                 已在 MSVCRTD.lib(chandler4gs.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+               已找到 ___report_gsfailure
+                 已在 MSVCRTD.lib(secchk.obj) 中引用
+                 已加载 MSVCRTD.lib(gs_report.obj)
+               已找到 __crt_debugger_hook
+                 已在 MSVCRTD.lib(gs_report.obj) 中引用
+                 已加载 MSVCRTD.lib(MSVCR100D.dll)
+             正在搜索 G:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\lib\OLDNAMES.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\kernel32.lib:
+               已找到 __imp__EncodePointer@4
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__InterlockedExchange@8
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__Sleep@4
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__InterlockedCompareExchange@12
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__HeapSetInformation@16
+                 已在 MSVCRTD.lib(crtexe.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__WideCharToMultiByte@32
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__IsDebuggerPresent@0
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已在 MSVCRTD.lib(gs_report.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__MultiByteToWideChar@24
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__RaiseException@16
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__lstrlenA@4
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetProcAddress@8
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__LoadLibraryW@4
+                 已在 MSVCRTD.lib(_error_.obj) 中引用
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__SetUnhandledExceptionFilter@4
+                 已在 MSVCRTD.lib(unhandld.obj) 中引用
+                 已在 MSVCRTD.lib(gs_report.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__DecodePointer@4
+                 已在 MSVCRTD.lib(atonexit.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__QueryPerformanceCounter@4
+                 已在 MSVCRTD.lib(gs_support.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetTickCount@0
+                 已在 MSVCRTD.lib(gs_support.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetCurrentThreadId@0
+                 已在 MSVCRTD.lib(gs_support.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetCurrentProcessId@0
+                 已在 MSVCRTD.lib(gs_support.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetSystemTimeAsFileTime@4
+                 已在 MSVCRTD.lib(gs_support.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__HeapFree@12
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__HeapAlloc@12
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetProcessHeap@0
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetModuleFileNameW@12
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__VirtualQuery@12
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__FreeLibrary@4
+                 已在 MSVCRTD.lib(_pdblkup_.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__TerminateProcess@8
+                 已在 MSVCRTD.lib(gs_report.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__GetCurrentProcess@0
+                 已在 MSVCRTD.lib(gs_report.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __imp__UnhandledExceptionFilter@4
+                 已在 MSVCRTD.lib(gs_report.obj) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 __IMPORT_DESCRIPTOR_KERNEL32
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+               已找到 KERNEL32_NULL_THUNK_DATA
+                 已在 kernel32.lib(KERNEL32.dll) 中引用
+                 已加载 kernel32.lib(KERNEL32.dll)
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\user32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\gdi32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\winspool.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\comdlg32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\advapi32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\shell32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\ole32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\oleaut32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\uuid.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\odbc32.lib:
+             正在搜索 C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\lib\odbccp32.lib:
+             正在搜索 G:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\lib\MSVCRTD.lib:
+             正在搜索 G:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\lib\OLDNAMES.lib:
+         
+         已完成库搜索
+         
+         已完成传递 1
+         
+         正在生成非 SAFESEH 映像。
+         正在启动传递 2
+              test0327.obj
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              kernel32.lib(KERNEL32.dll)
+              MSVCRTD.lib(unhandld.obj)
+              MSVCRTD.lib(atonexit.obj)
+              MSVCRTD.lib(cinitexe.obj)
+              MSVCRTD.lib(crtexe.obj)
+              MSVCRTD.lib(dllargv.obj)
+              MSVCRTD.lib(gs_cookie.obj)
+              MSVCRTD.lib(gs_report.obj)
+              MSVCRTD.lib(gs_support.obj)
+              MSVCRTD.lib(merr.obj)
+              MSVCRTD.lib(natstart.obj)
+              MSVCRTD.lib(pesect.obj)
+              MSVCRTD.lib(wildcard.obj)
+              MSVCRTD.lib(chandler4gs.obj)
+              MSVCRTD.lib(fp8.obj)
+              MSVCRTD.lib(secchk.obj)
+              MSVCRTD.lib(_newmode.obj)
+              MSVCRTD.lib(xncommod.obj)
+              MSVCRTD.lib(xtxtmode.obj)
+              MSVCRTD.lib(xthdloc.obj)
+              MSVCRTD.lib(_userapi_.obj)
+              MSVCRTD.lib(_stack_.obj)
+              MSVCRTD.lib(_pdblkup_.obj)
+              MSVCRTD.lib(_initsect_.obj)
+              MSVCRTD.lib(_init_.obj)
+              MSVCRTD.lib(_error_.obj)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+              MSVCRTD.lib(MSVCR100D.dll)
+         已完成传递 2
+         test0327.vcxproj -> C:\Users\Administrator\Desktop\王全武\0327\test0327\Debug\test0327.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Administrator\Desktop\王全武\0327\test0327\Debug\test0327.exe;#1" /manifest Debug\test0327.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Debug\test0327.unsuccessfulbuild”。
+         正在对“Debug\test0327.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“C:\Users\Administrator\Desktop\王全武\0327\test0327\test0327\test0327.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.94
