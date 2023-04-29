@@ -1,0 +1,4 @@
+﻿  test.c
+C:\Users\Administrator\Desktop\王全武\0428\Project1\Project1\test.c(221,16): warning C4013: “malloc”未定义；假设外部返回 int
+C:\Users\Administrator\Desktop\王全武\0428\Project1\Project1\test.c(223,28): warning C4034: sizeof 返回 0
+  Project1.vcxproj -> C:\Users\Administrator\Desktop\王全武\0428\Project1\Debug\Project1.exe
