@@ -1,0 +1,4 @@
+﻿  game.c
+C:\Users\Administrator\Desktop\王全武\扫雷\扫雷\扫雷\game.c(13,9): warning C4552: ”-“: 未使用表达式结果
+C:\Users\Administrator\Desktop\王全武\扫雷\扫雷\扫雷\game.c(7): warning C4716: “get_mine_count”: 必须返回一个值
+  扫雷.vcxproj -> C:\Users\Administrator\Desktop\王全武\扫雷\扫雷\Debug\扫雷.exe
