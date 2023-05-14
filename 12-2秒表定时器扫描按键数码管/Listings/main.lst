@@ -1,0 +1,129 @@
+C51 COMPILER V9.54   MAIN                                                                  05/14/2023 22:04:06 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Nixie.h"
+   3          #include "Key.h"
+   4          #include "Timer0.h"
+   5          #include "AT24C02.h"
+   6          #include "Delay.h"
+   7          
+   8          unsigned char haomiao,Sec,Min;
+   9          unsigned char Flag;
+  10          
+  11          void shijian()
+  12          {
+  13   1        if(Flag)
+  14   1        {
+  15   2          haomiao++;
+  16   2          if(haomiao>=100)
+  17   2          {
+  18   3            haomiao=0;
+  19   3            Sec++;
+  20   3            if(Sec>=60)
+  21   3            {
+  22   4              Sec=0;
+  23   4              Min++;
+  24   4              if(Min>=60)
+  25   4              {
+  26   5                Min=0;
+  27   5              }
+  28   4            }
+  29   3          }
+  30   2        }
+  31   1      }
+  32          
+  33          
+  34          void main()
+  35          {
+  36   1        unsigned char KeyNum,Temp;
+  37   1        Timer0Init();
+  38   1        while(1)
+  39   1        {
+  40   2          KeyNum=Key();
+  41   2          if(KeyNum==1)
+  42   2          {
+  43   3            Flag=!Flag;
+  44   3          }
+  45   2          if(KeyNum==2)
+  46   2          {
+  47   3            haomiao=0;
+  48   3            Min=0;
+  49   3            Sec=0;
+  50   3          }
+  51   2          if(KeyNum==3)
+  52   2          {
+  53   3            AT24C02_WiteByte(1,Min);
+  54   3            Delay(3);
+C51 COMPILER V9.54   MAIN                                                                  05/14/2023 22:04:06 PAGE 2   
+
+  55   3            AT24C02_WiteByte(2,Sec);
+  56   3            Delay(3);
+  57   3            AT24C02_WiteByte(3,haomiao);
+  58   3            Delay(3);
+  59   3          }
+  60   2          if(KeyNum==4)
+  61   2          {
+  62   3            haomiao=AT24C02_ReadByte(3);
+  63   3            Min=AT24C02_ReadByte(1);
+  64   3            Sec=AT24C02_ReadByte(2);
+  65   3          }
+  66   2          Nixie(1,Min/10);
+  67   2          Nixie(2,Min%10);
+  68   2          Nixie(3,11);
+  69   2          Nixie(4,Sec/10);
+  70   2          Nixie(5,Sec%10);
+  71   2          Nixie(6,11);
+  72   2          Nixie(7,haomiao/10);
+  73   2          Nixie(8,haomiao%10);
+  74   2          
+  75   2        }
+  76   1      }
+*** WARNING C280 IN LINE 36 OF main.c: 'Temp': unreferenced local variable
+  77          
+  78          
+  79          void Timer0_Routine() interrupt 1
+  80          {
+  81   1        static unsigned int T0Count1,T0Count2,T0Count3;
+  82   1        TL0 = 0x18;   //??????
+  83   1        TH0 = 0xFC;   //??????
+  84   1        T0Count1++;
+  85   1        T0Count2++;
+  86   1        T0Count3++;
+  87   1        if(T0Count1>=15)
+  88   1        {
+  89   2          T0Count1=0;
+  90   2      //    P2=~P2;
+  91   2          Key_Loop();
+  92   2        }
+  93   1      
+  94   1            Nixie_Loop();
+  95   1          if(T0Count3>=10)
+  96   1          {
+  97   2            shijian();
+  98   2            T0Count3=0;
+  99   2          }
+ 100   1      
+ 101   1      
+ 102   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    411    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
