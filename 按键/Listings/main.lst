@@ -1,0 +1,57 @@
+C251 COMPILER V5.60.0,  main                                                               30/05/23  23:55:58  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE main.c INTR2 BROWSE DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\
+                    -Objects\main.obj) 
+
+stmt  level    source
+
+    1          #include <STC32G.H>
+    2          #include "Key.h"
+    3          #include "LED.h"
+    4          
+    5          #define MAIN_Fosc     24000000
+    6          
+    7          void main()
+    8          {
+    9   1        unsigned char K=0;
+   10   1        
+   11   1        Key_Init();
+   12   1        LED_Init();
+   13   1        
+   14   1        while(1)
+   15   1        {
+   16   2          K=Key();
+   17   2          if(K==1)
+   18   2          {
+   19   3            LED_R=~LED_R;
+   20   3            LED_L=~LED_L;
+   21   3          }
+   22   2        }
+   23   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        22     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

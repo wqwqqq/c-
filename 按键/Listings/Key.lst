@@ -1,0 +1,58 @@
+C251 COMPILER V5.60.0,  Key                                                                30/05/23  23:48:25  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE Key
+OBJECT MODULE PLACED IN .\Objects\Key.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE Key.c INTR2 BROWSE DEBUG PRINT(.\Listings\Key.lst) TABS(2) OBJECT(.\Ob
+                    -jects\Key.obj) 
+
+stmt  level    source
+
+    1          #include <STC32G.H>
+    2          #include "Delay.h"
+    3          
+    4          sbit KEY_N=P3^7;
+    5          
+    6          void Key_Init()
+    7          {
+    8   1        EAXFR=1;
+    9   1        CKCON=0X00;
+   10   1        WTST=0X00;
+   11   1        
+   12   1        P3M0=0X10;//配置P0口端口模式
+   13   1        P3M1=0X80;
+   14   1        
+   15   1        P3PU=0x80;//配置上拉电阻
+   16   1        
+   17   1      }
+   18          
+   19          unsigned char Key()
+   20          {
+   21   1        unsigned char K=0; 
+   22   1        if(KEY_N==0){Delay(10);while(KEY_N==0);Delay(10);K=1;}
+   23   1        return K;
+   24   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        67     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
