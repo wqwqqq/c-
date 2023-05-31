@@ -1,0 +1,134 @@
+C251 COMPILER V5.60.0,  main                                                               30/05/23  23:21:07  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE main.c INTR2 BROWSE DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\
+                    -Objects\main.obj) 
+
+stmt  level    source
+
+    1          //实验内容：学习IO口输出配制，实现闪烁的功能
+    2          //实验日期：2023-05-30
+    3          
+    4          #include <STC32G.H>
+    5          #include <Delay.h>
+    6          #define MAIN_Fosc     24000000
+    7          
+    8          sbit LED_L=P3^4;
+    9          sbit LED_R=P0^5;
+   10          
+   11          //void main()
+   12          //{
+   13          //  EAXFR=1;
+   14          //  CKCON=0X00;
+   15          //  WTST=0X00;
+   16          //  
+   17          //  P0M0=0X20;//配置P0口端口模式
+   18          //  P0M1=0X00;
+   19          //  
+   20          //  P3M0=0X10;
+   21          //  P3M1=0X00;
+   22          //  
+   23          //  while(1)
+   24          //  {
+   25          //    LED_L=1;
+   26          //    LED_R=1;
+   27          //    Delay(100);
+   28          //    LED_L=0;
+   29          //    LED_R=0;
+   30          //    Delay(100);
+   31          //    LED_L=1;
+   32          //    LED_R=1;
+   33          //    Delay(100);
+   34          //    LED_L=0;
+   35          //    LED_R=0;
+   36          //    Delay(100);
+   37          //    LED_L=1;
+   38          //    LED_R=1;
+   39          //    Delay(100);
+   40          //    LED_L=0;
+   41          //    LED_R=0;
+   42          //    Delay(100);
+   43          //    LED_L=1;
+   44          //    LED_R=1;
+   45          //    Delay(100);
+   46          //    LED_L=0;
+   47          //    LED_R=0;
+   48          //    Delay(100);
+   49          //    
+   50          //    LED_L=1;
+   51          //    LED_R=1;
+   52          //    Delay(500);
+   53          //    LED_L=0;
+   54          //    LED_R=0;
+   55          //    Delay(500);
+   56          //  }
+   57          //}
+   58          
+C251 COMPILER V5.60.0,  main                                                               30/05/23  23:21:07  PAGE 2   
+
+   59          long a=0;
+   60          
+   61          void main()
+   62          {
+   63   1          EAXFR=1;
+   64   1          CKCON=0X00;
+   65   1          WTST=0X00;
+   66   1          
+   67   1          P0M0=0X20;//配置P0口端口模式
+   68   1          P0M1=0X00;
+   69   1          
+   70   1          P3M0=0X10;
+   71   1          P3M1=0X00;
+   72   1        
+   73   1          while(1)
+   74   1          {
+   75   2            unsigned i=25535;
+   76   2            while(a<9294960)
+   77   2            {
+   78   3              a++;
+   79   3              LED_L=1;
+   80   3              LED_R=1;
+   81   3              LED_L=0;
+   82   3              LED_R=0;
+   83   3              LED_L=0;
+   84   3              LED_R=0;
+   85   3              LED_L=0;
+   86   3              LED_R=0;
+   87   3              LED_L=0;
+   88   3              LED_R=0;  
+   89   3            }
+   90   2            
+   91   2            while(a--)
+   92   2            {
+   93   3              LED_L=1;
+   94   3              LED_R=1;      
+   95   3            }
+   96   2          }
+   97   1      
+   98   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        88     ------
+  ecode size           =    ------     ------
+  data size            =         4     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =         8     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
