@@ -1,0 +1,104 @@
+C251 COMPILER V5.60.0,  main                                                               01/06/23  00:13:27  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE main
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE main.c INTR2 BROWSE DEBUG PRINT(.\Listings\main.lst) TABS(2) OBJECT(.\
+                    -Objects\main.obj) 
+
+stmt  level    source
+
+    1          #include <STC32G.H>
+    2          #include "motor.h"
+    3          #include "Key.h"
+    4          #include "Timer.h"
+    5          #include "LED.h"
+    6          
+    7          
+    8           char PWM;
+    9          
+   10          void main()
+   11          {
+   12   1        unsigned char K=0;
+   13   1        unsigned char Flag=0;
+   14   1        LED_Init();
+   15   1        Timer4Init();
+   16   1        Key_Init();
+   17   1        Motor_Init();
+   18   1        while(1)
+   19   1        {
+   20   2          K=Key();
+   21   2          if(K==1)
+   22   2          {
+   23   3            if(Flag==0)
+   24   3            {
+   25   4              PWM+=20;
+   26   4              if(PWM>100)
+   27   4              {
+   28   5                Flag=!Flag;
+   29   5                PWM-=20;
+   30   5              }
+   31   4            }
+   32   3            else
+   33   3            {
+   34   4              PWM-=20;
+   35   4              if(PWM<0)
+   36   4              {
+   37   5                Flag=!Flag; 
+   38   5                PWM+=20;
+   39   5              }
+   40   4            }
+   41   3          }
+   42   2        }
+   43   1      }
+   44          
+   45          /***********************************************************
+   46          功能描述：定时器4中断服务程序
+   47          入口参数：无
+   48          返回值：无       250us进入1次中断 
+   49          ************************************************************/
+   50          void timer4_int (void) interrupt 20
+   51          {
+   52   1          static unsigned int count;
+   53   1          count++;
+   54   1          count%=100;
+   55   1          if(PWM>=count&&PWM!=0)
+   56   1          {
+   57   2            Car_F();
+   58   2            LED_ON();
+C251 COMPILER V5.60.0,  main                                                               01/06/23  00:13:27  PAGE 2   
+
+   59   2          }
+   60   1          else
+   61   1          {
+   62   2            Car_Stop();
+   63   2            LED_OFF();
+   64   2          }
+   65   1      } 
+   66          
+   67          /*********************************END FILE********************************************/ 
+   68          
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =       185     ------
+  ecode size           =    ------     ------
+  data size            =         3     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

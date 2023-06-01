@@ -1,0 +1,60 @@
+C251 COMPILER V5.60.0,  LED                                                                31/05/23  23:52:12  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Objects\LED.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE LED.c INTR2 BROWSE DEBUG PRINT(.\Listings\LED.lst) TABS(2) OBJECT(.\Ob
+                    -jects\LED.obj) 
+
+stmt  level    source
+
+    1          #include <STC32G.H>
+    2          
+    3          sbit LED_L=P3^4;
+    4          sbit LED_R=P0^5;
+    5          
+    6          void LED_Init()
+    7          {
+    8   1        P3M0|=0X10;
+    9   1        P3M1&=0XEF;
+   10   1        
+   11   1        P0M0|=0X20;
+   12   1        P0M1&=0XDF;
+   13   1        
+   14   1      }
+   15          
+   16          void LED_ON()
+   17          {
+   18   1        LED_L=1;  
+   19   1        LED_R=1;
+   20   1      }
+   21          
+   22          void LED_OFF()
+   23          {
+   24   1        LED_L=0;  
+   25   1        LED_R=0;
+   26   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        23     ------
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

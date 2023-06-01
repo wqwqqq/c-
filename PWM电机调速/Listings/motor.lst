@@ -1,0 +1,90 @@
+C251 COMPILER V5.60.0,  motor                                                              31/05/23  21:30:07  PAGE 1   
+
+
+C251 COMPILER V5.60.0, COMPILATION OF MODULE motor
+OBJECT MODULE PLACED IN .\Objects\motor.obj
+COMPILER INVOKED BY: C:\Keil_v5\C251\BIN\C251.EXE motor.c INTR2 BROWSE DEBUG PRINT(.\Listings\motor.lst) TABS(2) OBJECT(
+                    -.\Objects\motor.obj) 
+
+stmt  level    source
+
+    1          #include "motor.h"
+    2          
+    3          sbit LH_B=P2^0;
+    4          sbit LH_F=P2^1;
+    5          
+    6          sbit RH_F=P2^2;
+    7          sbit RH_B=P2^3;
+    8          
+    9          sbit RQ_F=P1^4;
+   10          sbit RQ_B=P1^5;
+   11          
+   12          sbit LQ_F=P1^7;
+   13          sbit LQ_B=P1^6;
+   14          
+   15          void Motor_Init()
+   16          {
+   17   1        P2M0=0X0F;
+   18   1        P2M1=0X00;
+   19   1        
+   20   1        P1M0=0Xf0;
+   21   1        P1M1=0X00;
+   22   1      }
+   23          
+   24          void Car_F()
+   25            
+   26          {
+   27   1        LH_B=1;
+   28   1        LH_F=0;
+   29   1        
+   30   1        RH_F=0;
+   31   1        RH_B=1;
+   32   1        
+   33   1        RQ_F=1;
+   34   1        RQ_B=0;
+   35   1        
+   36   1        LQ_F=1;
+   37   1        LQ_B=0;
+   38   1      }
+   39          
+   40          void Car_Stop()
+   41          {
+   42   1        LH_B=0;
+   43   1        LH_F=0;
+   44   1             
+   45   1        RH_F=0;
+   46   1        RH_B=0;
+   47   1             
+   48   1        RQ_F=0;
+   49   1        RQ_B=0;
+   50   1             
+   51   1        LQ_F=0;
+   52   1        LQ_B=0;
+   53   1        
+   54   1      }
+
+
+Module Information          Static   Overlayable
+------------------------------------------------
+  code size            =        47     ------
+C251 COMPILER V5.60.0,  motor                                                              31/05/23  21:30:07  PAGE 2   
+
+  ecode size           =    ------     ------
+  data size            =    ------     ------
+  idata size           =    ------     ------
+  pdata size           =    ------     ------
+  xdata size           =    ------     ------
+  xdata-const size     =    ------     ------
+  edata size           =    ------     ------
+  bit size             =    ------     ------
+  ebit size            =    ------     ------
+  bitaddressable size  =    ------     ------
+  ebitaddressable size =    ------     ------
+  far data size        =    ------     ------
+  huge data size       =    ------     ------
+  const size           =    ------     ------
+  hconst size          =    ------     ------
+End of Module Information.
+
+
+C251 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
