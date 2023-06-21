@@ -1,0 +1,211 @@
+C51 COMPILER V9.54   KEY_S                                                                 06/14/2023 16:02:23 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY_S
+OBJECT MODULE PLACED IN .\list\Key_s.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE USER\Key_s.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(.\LIB;.\USER;.\SYS) D
+                    -EBUG OBJECTEXTEND PRINT(.\list\Key_s.lst) TABS(2) OBJECT(.\list\Key_s.obj)
+
+line level    source
+
+   1          #include "key_s.h"
+   2          
+   3          void Key_Init()//按键初始化
+   4          {
+   5   1        GPIO_InitTypeDef GPIOx;
+   6   1        
+   7   1        GPIOx.Mode=GPIO_OUT_PP;
+   8   1        GPIOx.Pin=GPIO_Pin_0; 
+   9   1        GPIO_Inilize(GPIO_P2,&GPIOx);
+  10   1          
+  11   1        
+  12   1        GPIOx.Mode=GPIO_PullUp;
+  13   1        GPIOx.Pin=GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3; 
+  14   1        GPIO_Inilize(GPIO_P4,&GPIOx);
+  15   1      
+  16   1        GPIOx.Mode=GPIO_PullUp;
+  17   1        GPIOx.Pin=GPIO_Pin_6|GPIO_Pin_7;  
+  18   1        GPIO_Inilize(GPIO_P3,&GPIOx);
+  19   1      
+  20   1      }
+  21          
+  22          //读取按键电频
+  23          static u8 Key_Read(void)
+  24          {
+  25   1          if(!READ_KEY1)  
+  26   1          return KEY1_PRES;//0x01
+  27   1          if(!READ_KEY2)  
+  28   1          return KEY2_PRES;//0x02     
+  29   1          if(!READ_KEY3)  
+  30   1          return KEY3_PRES;//0x04
+  31   1          if(!READ_KEY4)  
+  32   1          return KEY4_PRES;//0x08
+  33   1          if(!READ_KEY5)  
+  34   1          return KEY5_PRES;//0x10   
+  35   1          if(!READ_KEY6)  
+  36   1          return KEY6_PRES;//0x20
+  37   1        
+  38   1        return KEY_NONE;
+  39   1      }
+  40          
+  41          //状态机
+  42          static u8 Key_Scan(void)
+  43          {
+  44   1        static u8 state = 0; //按键初始化状态
+  45   1        static u8 KEY_LAST=0,KEY_NOW=0; //记录两次电平的状态
+  46   1        u8 KEY_VALUE=0;
+  47   1       
+  48   1        KEY_NOW = Key_Read();//读取按键
+  49   1         
+  50   1        switch(state)
+  51   1        {
+  52   2          case 0:
+  53   2          {
+  54   3            if(KEY_NOW != KEY_LAST) state = 1; //有按键按下
+C51 COMPILER V9.54   KEY_S                                                                 06/14/2023 16:02:23 PAGE 2   
+
+  55   3          }break;
+  56   2          case 1: 
+  57   2          {
+  58   3            if(KEY_NOW == KEY_LAST) state = 2; //消抖之后按键有效
+  59   3            else state = 0; //认为吴触
+  60   3          }break; 
+  61   2          case 2: //消抖之后
+  62   2          {
+  63   3            if(KEY_NOW == KEY_LAST) //还是按键按下的状态
+  64   3            {
+  65   4                state = 3;//长按的状态
+  66   4            }
+  67   3            else//松开
+  68   3            {
+  69   4              state = 0; 
+  70   4              
+  71   4              KEY_VALUE = KEY_LAST|KEY_SHORT;  //返回按键短按的值
+  72   4            }
+  73   3          }break;
+  74   2          
+  75   2          case 3: //判断长按还是短按
+  76   2          {
+  77   3            if(KEY_NOW == KEY_LAST) 
+  78   3            {
+  79   4                static u8 cnt = 0;
+  80   4              if(cnt++ > 120) //1200ms
+  81   4              {
+  82   5                cnt = 0; 
+  83   5                state = 4;
+  84   5                KEY_VALUE = KEY_LAST|KEY_LONG; //返回按键长安
+  85   5              }       
+  86   4            }
+  87   3            else
+  88   3            {
+  89   4              state = 0;
+  90   4              KEY_VALUE = KEY_LAST|KEY_SHORT; //否则返回短按  
+  91   4            }
+  92   3          }break;
+  93   2          case 4://长按检查是否松手
+  94   2          {
+  95   3            if(KEY_NOW != KEY_LAST) 
+  96   3              state = 5;
+  97   3          }break;
+  98   2          case 5://长按检查是否松手
+  99   2          {
+ 100   3            if(KEY_NOW == KEY_LAST) 
+ 101   3            {
+ 102   4            state = 0;
+ 103   4            return KEY_VALUE;//返回按键值
+ 104   4            }
+ 105   3          }break;
+ 106   2        }//switch
+ 107   1        
+ 108   1        KEY_LAST = KEY_NOW; //状态更新，
+ 109   1        return KEY_VALUE;//返回按键值
+ 110   1      }
+ 111          
+ 112          
+ 113          /**************************************************************/
+ 114          /*按键按下，短按返回键码值1 2 3 4 5 6，长按返回键码值11 12 13 14 15 16 */
+ 115          u8 Key_Hander(void)         
+ 116          {
+C51 COMPILER V9.54   KEY_S                                                                 06/14/2023 16:02:23 PAGE 3   
+
+ 117   1        u8 KEY_NUM=0;//获取的键码值
+ 118   1      //  static u32 LAST=0;
+ 119   1      //  if(Systick_ms-LAST<10)  return;
+ 120   1      //  LAST = Systick_ms;  
+ 121   1        
+ 122   1        KEY_NUM = Key_Scan();  //读取键码值
+ 123   1        if(KEY_NUM == KEY_NONE) return 0;//没有按键按下，直接return
+ 124   1        
+ 125   1        if(KEY_NUM & KEY_SHORT) //按键按下，&短按的值不等于0就是短按了
+ 126   1        {    
+ 127   2          if(KEY_NUM & KEY1_PRES)//KEY1_PRES
+ 128   2          {       
+ 129   3            return 1;
+ 130   3          }
+ 131   2          else if(KEY_NUM & KEY2_PRES)//KEY2_PRES
+ 132   2          {
+ 133   3            return 2;
+ 134   3          }   
+ 135   2          else if(KEY_NUM & KEY3_PRES)//KEY3_PRES
+ 136   2          {
+ 137   3            return 3;
+ 138   3          }
+ 139   2          else if(KEY_NUM & KEY4_PRES)//KEY4_PRES
+ 140   2          {
+ 141   3            return 4;
+ 142   3          }
+ 143   2          else if(KEY_NUM & KEY5_PRES)//KEY5_PRES
+ 144   2          {
+ 145   3            return 5;
+ 146   3          }
+ 147   2          else if(KEY_NUM & KEY6_PRES)//KEY5_PRES
+ 148   2          {
+ 149   3            return 6;
+ 150   3          }
+ 151   2        }
+ 152   1        else if(KEY_NUM & KEY_LONG) //?? 
+ 153   1        {
+ 154   2          if(KEY_NUM & KEY1_PRES)//KEY1_PRES
+ 155   2          {
+ 156   3            return 11;
+ 157   3          }
+ 158   2          else if(KEY_NUM & KEY2_PRES)//KEY2_PRES
+ 159   2          {
+ 160   3            return 12;
+ 161   3          }   
+ 162   2          else if(KEY_NUM & KEY3_PRES)//KEY3_PRES
+ 163   2          {
+ 164   3            return 13;
+ 165   3          }
+ 166   2          else if(KEY_NUM & KEY4_PRES)//KEY4_PRES
+ 167   2          {
+ 168   3            return 14;
+ 169   3          }
+ 170   2          else if(KEY_NUM & KEY5_PRES)//KEY5_PRES
+ 171   2          {
+ 172   3            return 15;
+ 173   3          }
+ 174   2          else if(KEY_NUM & KEY6_PRES)//KEY5_PRES
+ 175   2          {
+ 176   3            return 16;
+ 177   3          }
+ 178   2        } 
+C51 COMPILER V9.54   KEY_S                                                                 06/14/2023 16:02:23 PAGE 4   
+
+ 179   1        
+ 180   1        return 0;
+ 181   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    409    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      4       2
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

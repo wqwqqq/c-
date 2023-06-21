@@ -1,0 +1,27 @@
+".\list\main.obj",
+".\list\LED.obj",
+".\list\TM1668.obj",
+".\list\Key_s.obj",
+".\list\timer0.obj",
+".\list\HX711.obj",
+".\list\Scale.obj",
+".\list\My_eeprom.obj",
+".\list\Buzzer.obj",
+".\list\delay.obj",
+".\list\ADC.obj",
+".\list\compare.obj",
+".\list\EEPROM.obj",
+".\list\Exti.obj",
+".\list\GPIO.obj",
+".\list\I2C.obj",
+".\list\PCA.obj",
+".\list\PWM.obj",
+".\list\PWM15bit.obj",
+".\list\Soft_UART.obj",
+".\list\spi.obj",
+".\list\timer.obj",
+".\list\UART.obj",
+".\list\WDT.obj" 
+TO ".\list\Project" 
+PRINT(".\list\Project.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 

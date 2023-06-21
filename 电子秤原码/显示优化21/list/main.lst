@@ -1,0 +1,467 @@
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\list\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE USER\main.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(.\LIB;.\USER;.\SYS) DE
+                    -BUG OBJECTEXTEND PRINT(.\list\main.lst) TABS(2) OBJECT(.\list\main.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          #include "TM1668.h"
+   3          #include "LED.h"
+   4          
+   5          extern u8 Flag_ERROR;//称重状态标志位
+   6          extern u16 GapValue;//校准值
+   7          u8 Flag,num,Temp,Key,G_Flag=1,Buzzer_flag;//主函数中显示重量标志位，刷新时间标志位，
+   8          u8 epprom_add=0,read_add=0;//数据写地址，数据读地址
+   9          unsigned char count=0;
+  10          
+  11          void Weight_DisPlay(long Weight_Shiwu)//重量显示函数，参数是出入的重量值，并根据称重状态标志位显示正负或其
+             -他
+  12          {     
+  13   1            if(Weight_Shiwu<10000)//显示9.999kg——0kg
+  14   1            {
+  15   2            
+  16   2            if(Flag_ERROR==0)//显示正数
+  17   2            {
+  18   3            TM1668_DisPlay(1,Weight_Shiwu%10);
+  19   3            TM1668_DisPlay(2,Weight_Shiwu/10%10);
+  20   3            TM1668_DisPlay(3,Weight_Shiwu/100%10);
+  21   3            TM1668_DisPlay(4,Weight_Shiwu/1000%10+10);
+  22   3            TM1668_DisPlay(5,21);
+  23   3            TM1668_DisPlay(6,21);   
+  24   3            }
+  25   2            if(Flag_ERROR==2)//显示负数
+  26   2            {
+  27   3            TM1668_DisPlay(1,Weight_Shiwu%10);
+  28   3            TM1668_DisPlay(2,Weight_Shiwu/10%10);
+  29   3            TM1668_DisPlay(3,Weight_Shiwu/100%10);
+  30   3            TM1668_DisPlay(4,Weight_Shiwu/1000%10+10);
+  31   3            TM1668_DisPlay(5,20);
+  32   3            TM1668_DisPlay(6,21);
+  33   3            }
+  34   2            }
+  35   1            else if(Weight_Shiwu>=10000&&Weight_Shiwu<100000)//显示99.999kg-10.000kg
+  36   1            {
+  37   2              if(Flag_ERROR==0)//显示正数
+  38   2              {
+  39   3              TM1668_DisPlay(1,Weight_Shiwu%10);
+  40   3              TM1668_DisPlay(2,Weight_Shiwu/10%10);
+  41   3              TM1668_DisPlay(3,Weight_Shiwu/100%10);
+  42   3              TM1668_DisPlay(4,Weight_Shiwu/1000%10+10);
+  43   3              TM1668_DisPlay(5,Weight_Shiwu/10000%10);
+  44   3              TM1668_DisPlay(6,21);   
+  45   3              }
+  46   2              if(Flag_ERROR==2)//显示负数
+  47   2              {
+  48   3              TM1668_DisPlay(1,Weight_Shiwu%10);
+  49   3              TM1668_DisPlay(2,Weight_Shiwu/10%10);
+  50   3              TM1668_DisPlay(3,Weight_Shiwu/100%10);
+  51   3              TM1668_DisPlay(4,Weight_Shiwu/1000%10+10);
+  52   3              TM1668_DisPlay(5,Weight_Shiwu/10000%10);
+  53   3              TM1668_DisPlay(6,20);
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 2   
+
+  54   3              }
+  55   2            }
+  56   1          else if(Weight_Shiwu>=100000)//显示999.999kg-100.000kg
+  57   1          {
+  58   2              if(Flag_ERROR==0)
+  59   2              {
+  60   3              TM1668_DisPlay(1,Weight_Shiwu%10);
+  61   3              TM1668_DisPlay(2,Weight_Shiwu/10%10);
+  62   3              TM1668_DisPlay(3,Weight_Shiwu/100%10);
+  63   3              TM1668_DisPlay(4,Weight_Shiwu/1000%10+10);
+  64   3              TM1668_DisPlay(5,Weight_Shiwu/10000%10);
+  65   3              TM1668_DisPlay(6,Weight_Shiwu/100000%10);   
+  66   3              }
+  67   2              if(Flag_ERROR==2)
+  68   2              {
+  69   3              TM1668_DisPlay(1,Weight_Shiwu/10%10);
+  70   3              TM1668_DisPlay(2,Weight_Shiwu/100%10);
+  71   3              TM1668_DisPlay(3,Weight_Shiwu/1000%10+10);
+  72   3              TM1668_DisPlay(4,Weight_Shiwu/10000%10);
+  73   3              TM1668_DisPlay(5,Weight_Shiwu/100000%10);
+  74   3              TM1668_DisPlay(6,20);
+  75   3              }
+  76   2          
+  77   2          }
+  78   1      
+  79   1      }
+  80          
+  81          //数据写，将重量的值写入eeprom里
+  82          void Weight_Write()
+  83          {
+  84   1        char Data1,Data2,Data3,Data4,Data5,Data6;
+  85   1        u8 signed_flag=0;
+  86   1        long w=Get_Weight();
+  87   1        signed_flag=Flag_ERROR;
+  88   1        Data1=w%10;
+  89   1        Data2=w/10%10;
+  90   1        Data3=w/100%10;
+  91   1        Data4=w/1000%10;
+  92   1        Data5=w/10000%10;
+  93   1        Data6=w/100000%10;
+  94   1        EEPROM_Trig();
+  95   1        EEPROM_write_n(0x0200+epprom_add,&Data1,1);
+  96   1          delay_ms(10);
+  97   1        EEPROM_write_n(0x0201+epprom_add,&Data2,1);
+  98   1          delay_ms(10);
+  99   1        EEPROM_write_n(0x0202+epprom_add,&Data3,1);
+ 100   1          delay_ms(10);
+ 101   1        EEPROM_write_n(0x0203+epprom_add,&Data4,1);
+ 102   1          delay_ms(10);
+ 103   1        EEPROM_write_n(0x0204+epprom_add,&Data5,1);
+ 104   1          delay_ms(10);
+ 105   1        EEPROM_write_n(0x0205+epprom_add,&Data6,1);
+ 106   1          delay_ms(10);
+ 107   1        EEPROM_write_n(0x0206+epprom_add,&signed_flag,1);
+ 108   1        epprom_add+=7;
+ 109   1      //  TM1668_DisPlay(1,Data1);
+ 110   1      //  TM1668_DisPlay(2,Data2);
+ 111   1      //  TM1668_DisPlay(3,Data3);
+ 112   1      //  TM1668_DisPlay(4,Data4);
+ 113   1      //  TM1668_DisPlay(5,Data5);
+ 114   1      //  TM1668_DisPlay(6,Data6);
+ 115   1      
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 3   
+
+ 116   1        Weight_DisPlay(w);//显示要写入的值
+ 117   1        delay_255ms(2);
+ 118   1        TM1668_DisPlay(1,epprom_add/6%10);
+ 119   1        TM1668_DisPlay(2,epprom_add/6/10%10);
+ 120   1        TM1668_DisPlay(3,21);
+ 121   1        TM1668_DisPlay(4,21);
+ 122   1        TM1668_DisPlay(5,21);
+ 123   1        TM1668_DisPlay(6,21);   
+ 124   1      
+ 125   1      
+ 126   1      }
+ 127          
+ 128          //数据读，将eeprom中的值读出来
+ 129          void Read_Weight()
+ 130          {
+ 131   1          char Data1=0,Data2=0,Data3=0,Data4=0,Data5=0,Data6=0;
+ 132   1          u8 signed_flag=0;
+ 133   1          long w=0;
+ 134   1          if(read_add>=epprom_add)
+ 135   1          {
+ 136   2            read_add=0;
+ 137   2            if(read_add>=epprom_add)
+ 138   2            return;
+ 139   2          }
+ 140   1      
+ 141   1          EEPROM_Trig();
+ 142   1          EEPROM_read_n(0x0200+read_add,&Data1,1);
+ 143   1          delay_ms(10);
+ 144   1          EEPROM_read_n(0x0201+read_add,&Data2,1);
+ 145   1          delay_ms(10);
+ 146   1          EEPROM_read_n(0x0202+read_add,&Data3,1);
+ 147   1          delay_ms(10);
+ 148   1          EEPROM_read_n(0x0203+read_add,&Data4,1);
+ 149   1          delay_ms(10);
+ 150   1          EEPROM_read_n(0x0204+read_add,&Data5,1);
+ 151   1          delay_ms(10);
+ 152   1          EEPROM_read_n(0x0205+read_add,&Data6,1);
+ 153   1          delay_ms(10);
+ 154   1          EEPROM_read_n(0x0206+read_add,&signed_flag,1);
+ 155   1          read_add+=7;
+ 156   1        
+ 157   1          //显示存储的第几个值
+ 158   1          TM1668_DisPlay(1,read_add/6%10);
+ 159   1          TM1668_DisPlay(2,read_add/6/10%10);
+ 160   1          TM1668_DisPlay(3,21);
+ 161   1          TM1668_DisPlay(4,21);
+ 162   1          TM1668_DisPlay(5,21);
+ 163   1          TM1668_DisPlay(6,21);   
+ 164   1          w=Data1+Data2*10+Data3*100+Data4*1000+Data5*10000+Data6*100000;
+ 165   1          delay_255ms(2);
+ 166   1          Flag_ERROR=signed_flag;
+ 167   1          Weight_DisPlay(w);//显示要读初的值
+ 168   1      //    TM1668_DisPlay(1,Data1);
+ 169   1      //    TM1668_DisPlay(2,Data2);
+ 170   1      //    TM1668_DisPlay(3,Data3);
+ 171   1      //    TM1668_DisPlay(4,Data4);
+ 172   1      //    TM1668_DisPlay(5,Data5);
+ 173   1      //    TM1668_DisPlay(6,Data6);    
+ 174   1      }
+ 175          
+ 176          //开机显示动画
+ 177          void menu()
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 4   
+
+ 178          {
+ 179   1        u8 i=0;
+ 180   1        TM1668_DisPlay(6,22);
+ 181   1        TM1668_DisPlay(5,2);
+ 182   1        TM1668_DisPlay(4,2);
+ 183   1        TM1668_DisPlay(3,1);
+ 184   1        TM1668_DisPlay(2,1);
+ 185   1        TM1668_DisPlay(1,1);
+ 186   1        delay_255ms(6);
+ 187   1        TM1668_DisPlay(6,5);
+ 188   1        TM1668_DisPlay(5,0);
+ 189   1        TM1668_DisPlay(4,0);
+ 190   1        TM1668_DisPlay(3,0);
+ 191   1        TM1668_DisPlay(2,0);
+ 192   1        TM1668_DisPlay(1,0);
+ 193   1        delay_255ms(6);
+ 194   1        for(i=0;i<10;i++)
+ 195   1        {
+ 196   2          TM1668_DisPlay(6,19-i);
+ 197   2          TM1668_DisPlay(5,19-i);
+ 198   2          TM1668_DisPlay(4,19-i);
+ 199   2          TM1668_DisPlay(3,19-i);
+ 200   2          TM1668_DisPlay(2,19-i);
+ 201   2          TM1668_DisPlay(1,19-i);
+ 202   2          if(i<9)
+ 203   2          {
+ 204   3          delay_255ms(2);   
+ 205   3          }
+ 206   2        }
+ 207   1      
+ 208   1      }
+ 209          
+ 210          int main()
+ 211          {
+ 212   1        long Weight_Shiwu=0;//获取实物的变量
+ 213   1        Buzzer_Init();//蜂鸣器初始化
+ 214   1        Key_Init();//按键初始化
+ 215   1        TM1668_Init();//TM1668初始化
+ 216   1        LED_Init();//LED初始化
+ 217   1        P45=1;//上电蜂鸣器响，表示按键按下
+ 218   1        delay_255ms(1);
+ 219   1        P45=0;
+ 220   1      
+ 221   1        menu();//显示菜单
+ 222   1        Timer0_Init();//定时器初始化
+ 223   1        EA=1;//开启中断
+ 224   1        init_eeprom();//eeprom初始化
+ 225   1        HX711_Init();//HX711初始化
+ 226   1        delay_255ms(2); //延迟
+ 227   1        Get_Maopi();//Get_Maopi();//除皮
+ 228   1        delay_255ms(2);
+ 229   1        TM1668_DisPlay(7,18);//
+ 230   1      
+ 231   1        while(1)
+ 232   1        {
+ 233   2      
+ 234   2          Get_Weight();//得到重量
+ 235   2          num++;//
+ 236   2          if(num>=10){num=0;Flag=0;}
+ 237   2          if(Flag==0&&G_Flag==1)
+ 238   2          { 
+ 239   3            Weight_Shiwu=Get_Weight();
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 5   
+
+ 240   3      
+ 241   3            Weight_DisPlay(Weight_Shiwu);     
+ 242   3          }
+ 243   2          
+ 244   2          else if(Flag==1&&G_Flag==0)
+ 245   2          {
+ 246   3            TM1668_DisPlay(1,GapValue%10);
+ 247   3            TM1668_DisPlay(2,GapValue/10%10);
+ 248   3            TM1668_DisPlay(3,GapValue/100%10);
+ 249   3            TM1668_DisPlay(4,21);
+ 250   3            TM1668_DisPlay(5,21);
+ 251   3            TM1668_DisPlay(6,21);
+ 252   3          }
+ 253   2          
+ 254   2      /***********************按下按键开关按键打开关闭***************************************/
+ 255   2          if(Temp==1)
+ 256   2          {
+ 257   3      //      Buzzer_flag=2;
+ 258   3      //      P45=1;
+ 259   3            Temp=0;
+ 260   3          }
+ 261   2      /************************按下计数，开始计数*****************************************/
+ 262   2          if(Temp==2)
+ 263   2          {
+ 264   3            Buzzer_flag=2;
+ 265   3            P45=1;
+ 266   3            Weight_Write();
+ 267   3            Flag=1;num=0;     
+ 268   3            Temp=0;   
+ 269   3          }
+ 270   2      /*************************按下累计读取计数的值，当长按功能键可以加校准值**********************************
+             -******/
+ 271   2          if(Temp==3)
+ 272   2          {
+ 273   3            Buzzer_flag=1;
+ 274   3            P45=1;
+ 275   3            Read_Weight();  
+ 276   3            Flag=1;num=0;       
+ 277   3            Temp=0;
+ 278   3          }
+ 279   2      /********************长按后，进入调整校准值界面，短按减校准值*********************************************
+             -/
+ 280   2          if(Temp==4)
+ 281   2          {
+ 282   3            Buzzer_flag=1;
+ 283   3            P45=1;
+ 284   3            if(G_Flag==0)
+ 285   3            {
+ 286   4              Flag=1;num=0;       
+ 287   4              if(GapValue>0)
+ 288   4              {
+ 289   5                GapValue--;
+ 290   5              }
+ 291   4              else if(GapValue>999)
+ 292   4              {
+ 293   5              GapValue=0;
+ 294   5              }
+ 295   4              write_eeprom();
+ 296   4            }
+ 297   3      
+ 298   3            Temp=0;
+ 299   3          }
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 6   
+
+ 300   2      /************************按键去皮*****************************************/
+ 301   2          if(Temp==5)
+ 302   2          {
+ 303   3      /************长按功能按键*************************************************************/     
+ 304   3            Buzzer_flag=1;
+ 305   3            P45=1;
+ 306   3            if(G_Flag==0)
+ 307   3            {
+ 308   4              Flag=1;num=0;
+ 309   4              if(GapValue<999)
+ 310   4              {
+ 311   5                GapValue++;
+ 312   5              }
+ 313   4              else if(GapValue>999)
+ 314   4              {
+ 315   5                GapValue=0;
+ 316   5              }
+ 317   4            }
+ 318   3      /*************************************************************************/     
+ 319   3            else
+ 320   3            Get_Maopi();
+ 321   3            Temp=0;
+ 322   3          }
+ 323   2      /************************按键置0*****************************************/
+ 324   2          if(Temp==6)
+ 325   2          {
+ 326   3            Buzzer_flag=1;
+ 327   3            P45=1;
+ 328   3            read_add=0;
+ 329   3            epprom_add=0;
+ 330   3            EEPROM_Trig();
+ 331   3      
+ 332   3            delay_ms(10);
+ 333   3            EEPROM_SectorErase(0x0200);
+ 334   3            delay_ms(10);
+ 335   3      
+ 336   3            Temp=0;
+ 337   3          }
+ 338   2      /*****************************************************************/
+ 339   2          if(Temp==11)
+ 340   2          {
+ 341   3            Buzzer_flag=2;
+ 342   3            P45=1;
+ 343   3            Flag=1;G_Flag=2;
+ 344   3            
+ 345   3            EEPROM_Trig();
+ 346   3            delay_ms(10);
+ 347   3            EEPROM_SectorErase(0x0200);
+ 348   3            delay_ms(10);
+ 349   3            
+ 350   3            TM1668_DisPlay(1,21);
+ 351   3            TM1668_DisPlay(2,21);
+ 352   3            TM1668_DisPlay(3,21);
+ 353   3            TM1668_DisPlay(4,21);
+ 354   3            TM1668_DisPlay(5,21);
+ 355   3            TM1668_DisPlay(6,21);
+ 356   3            P20=!P20;
+ 357   3            Temp=0;
+ 358   3          }
+ 359   2      /*****************************************************************/
+ 360   2          if(Temp==12)
+ 361   2          {
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 7   
+
+ 362   3            Temp=0;
+ 363   3          }
+ 364   2      /*****************************************************************/
+ 365   2          if(Temp==13)
+ 366   2          {
+ 367   3            
+ 368   3            Temp=0;
+ 369   3          }
+ 370   2      /*****************************************************************/
+ 371   2          if(Temp==14)
+ 372   2          {
+ 373   3            Buzzer_flag=2;
+ 374   3            P45=1;
+ 375   3            Flag=1;num=0;G_Flag=!G_Flag;
+ 376   3            Temp=0;
+ 377   3          }
+ 378   2      /*****************************************************************/
+ 379   2          if(Temp==15)
+ 380   2          {
+ 381   3            Temp=0;
+ 382   3          }
+ 383   2      /*****************************************************************/
+ 384   2          if(Temp==16)
+ 385   2          {
+ 386   3            Temp=0;
+ 387   3          }
+ 388   2          
+ 389   2          delay_ms(200);
+ 390   2        }
+ 391   1        
+ 392   1        
+ 393   1      }
+ 394          
+ 395          /********************* Timer0中断函数************************/
+ 396          void timer0_int (void) interrupt TIMER0_VECTOR
+ 397          {
+ 398   1        static unsigned int i,j;
+ 399   1        if(Buzzer_flag==1)
+ 400   1        {
+ 401   2          j=200;
+ 402   2          Buzzer_flag=0;
+ 403   2        }
+ 404   1        if(Buzzer_flag==2)
+ 405   1        {
+ 406   2          j=0;
+ 407   2          Buzzer_flag=0;
+ 408   2        }
+ 409   1        
+ 410   1        i++;j++;
+ 411   1        if(i>20)
+ 412   1        {
+ 413   2          Key=Key_Hander();
+ 414   2          i=0;
+ 415   2          if(Key)
+ 416   2          {
+ 417   3            Temp=Key;
+ 418   3          }
+ 419   2        }
+ 420   1        
+ 421   1        if(j>400)
+ 422   1        {
+ 423   2          j=0;
+C51 COMPILER V9.54   MAIN                                                                  06/21/2023 16:33:06 PAGE 8   
+
+ 424   2          P45=0;
+ 425   2        }
+ 426   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   3572    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     13      31
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,36 @@
+C51 COMPILER V9.54   BUZZER                                                                06/14/2023 16:09:53 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE BUZZER
+OBJECT MODULE PLACED IN .\list\Buzzer.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE USER\Buzzer.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(.\LIB;.\USER;.\SYS) 
+                    -DEBUG OBJECTEXTEND PRINT(.\list\Buzzer.lst) TABS(2) OBJECT(.\list\Buzzer.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          
+   3          void Buzzer_Init()
+   4          {
+   5   1        GPIO_InitTypeDef GPIOx;
+   6   1        GPIOx.Mode=GPIO_OUT_PP;
+   7   1        GPIOx.Pin=GPIO_Pin_5;
+   8   1        
+   9   1        GPIO_Inilize(GPIO_P4,&GPIOx); 
+  10   1        
+  11   1        P45=0;
+  12   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     24    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----       2
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

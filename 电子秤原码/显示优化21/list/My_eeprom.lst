@@ -1,0 +1,58 @@
+C51 COMPILER V9.54   MY_EEPROM                                                             06/14/2023 16:02:23 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MY_EEPROM
+OBJECT MODULE PLACED IN .\list\My_eeprom.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE USER\My_eeprom.c LARGE OPTIMIZE(8,SPEED) BROWSE INCDIR(.\LIB;.\USER;.\SY
+                    -S) DEBUG OBJECTEXTEND PRINT(.\list\My_eeprom.lst) TABS(2) OBJECT(.\list\My_eeprom.obj)
+
+line level    source
+
+   1          #include "config.h"
+   2          
+   3          u8 num1,num2,gapvalue_flag;
+   4          extern u16 GapValue;
+   5          
+   6          void write_eeprom()
+   7          {
+   8   1        num1=GapValue/256;
+   9   1        num2=GapValue%256;
+  10   1        EEPROM_SectorErase(0x00);
+  11   1        EEPROM_write_n(0x00,&num1,1);
+  12   1        EEPROM_write_n(0x01,&num2,1);
+  13   1        EEPROM_write_n(0x02,&gapvalue_flag,1);
+  14   1      }
+  15          
+  16          void read_eeprom()
+  17          {
+  18   1        EEPROM_read_n(0x00,&num1,1);
+  19   1        EEPROM_read_n(0x01,&num2,1);
+  20   1        EEPROM_read_n(0x02,&gapvalue_flag,1);
+  21   1        
+  22   1        GapValue=num1*256+num2;
+  23   1      }
+  24          
+  25          void init_eeprom()
+  26          {
+  27   1        read_eeprom();
+  28   1        if(gapvalue_flag!=3)
+  29   1        {
+  30   2          GapValue=400;
+  31   2          gapvalue_flag=3;
+  32   2          write_eeprom();
+  33   2        }
+  34   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    197    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      3    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

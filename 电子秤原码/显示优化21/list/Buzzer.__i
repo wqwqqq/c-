@@ -1,0 +1,1 @@
+"USER\Buzzer.c" LARGE OPTIMIZE (8,SPEED) BROWSE INCDIR(.\LIB;.\USER;.\SYS) DEBUG OBJECTEXTEND PRINT(.\list\Buzzer.lst) TABS (2) OBJECT(.\list\Buzzer.obj)
