@@ -1,0 +1,93 @@
+C51 COMPILER V9.54   MAIN                                                                  06/25/2023 21:56:17 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "LCD1602.h"
+   3          
+   4          unsigned char sec,min,hour;
+   5          
+   6          void shijian()
+   7          {
+   8   1        sec++;
+   9   1        if(sec>=60)
+  10   1        {
+  11   2          min++;
+  12   2          sec=0;
+  13   2          if(min>=60)
+  14   2          {
+  15   3            hour++;
+  16   3            min=0;
+  17   3            if(hour>=24)
+  18   3            {
+  19   4              hour=0;
+  20   4            }
+  21   3          }
+  22   2        }
+  23   1      }
+  24          
+  25          
+  26          void Timer0_Init(void)    //1毫秒@11.0592MHz
+  27          {
+  28   1        TMOD &= 0xF0;     //设置定时器模式
+  29   1        TMOD |= 0x01;     //设置定时器模式
+  30   1        TL0 = 0xCD;       //设置定时初始值
+  31   1        TH0 = 0xD4;       //设置定时初始值
+  32   1        TF0 = 0;        //清除TF0标志
+  33   1        TR0 = 1;        //定时器0开始计时
+  34   1        EA=1;//开启定时器
+  35   1        ET0=1;//开启中断
+  36   1      
+  37   1      }
+  38          
+  39          void main()
+  40          {
+  41   1        Timer0_Init();
+  42   1        LCD_Init();
+  43   1        LCD_ShowString(1,3,":  :");
+  44   1        while(1)
+  45   1        {
+  46   2          LCD_ShowNum(1,1,hour,2);
+  47   2          LCD_ShowNum(1,4,min,2);
+  48   2          LCD_ShowNum(1,7,sec,2);
+  49   2        }
+  50   1      }
+  51          
+  52          void Timer0_Routine() interrupt 1
+  53          {
+  54   1        
+C51 COMPILER V9.54   MAIN                                                                  06/25/2023 21:56:17 PAGE 2   
+
+  55   1        static unsigned int count;
+  56   1        TL0 = 0xCD;       //设置定时初始值
+  57   1        TH0 = 0xD4;       //设置定时初始值
+  58   1        
+  59   1        count++;
+  60   1        if(count>100)
+  61   1        {
+  62   2          count=0;
+  63   2          shijian();
+  64   2        }
+  65   1        
+  66   1        
+  67   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    163    ----
+   CONSTANT SIZE    =      5    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
